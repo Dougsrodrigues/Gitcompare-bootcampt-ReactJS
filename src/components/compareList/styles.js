@@ -35,6 +35,15 @@ export const Repository = styled.div`
       font-size: 14px;
       color: #666;
     }
+
+    button {
+      background: red;
+      color: #fff;
+      border-radius: 3px;
+      padding: 5px;
+      position: absolute;
+      margin-left: 200px;
+    }
   }
 
   ul {

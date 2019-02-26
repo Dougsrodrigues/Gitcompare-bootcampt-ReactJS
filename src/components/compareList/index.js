@@ -11,6 +11,7 @@ const CompareList = ({ repositories }) => (
           <img src={repository.owner.avatar_url} alt={repository.owner.login} />
           <strong>{repository.name}</strong>
           <small>{repository.owner.login}</small>
+          <button className="fa fa-close" />
         </header>
         <ul>
           <li>

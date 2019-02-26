@@ -42,7 +42,23 @@ export default class Main extends Component {
         loading: false
       });
     }
+
+    //criando o localStorage e colocando o nome da chave de repository e o valor c o contenudo q vai p repositories
+    window.localStorage.setItem(
+      "repository",
+      JSON.stringify(this.state.repositories)
+    );
   };
+
+  // antes de montar a aplicação é feito a recuperação dos dados do localstorage e inseridos no state
+  componentWillMount() {
+    localStorage.getItem(
+      "repository" &&
+        this.setState({
+          repositories: JSON.parse(localStorage.getItem("repository"))
+        })
+    );
+  }
 
   render() {
     return (

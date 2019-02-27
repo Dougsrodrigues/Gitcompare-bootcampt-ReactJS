@@ -17,8 +17,8 @@ const CompareList = ({ repositories, removeRepository, updateRepository }) => (
               onClick={() => removeRepository(repository.id)}
             />
             <button
-              onClick={() => updateRepository(repository.id)}
               className="fa fa-refresh update"
+              onClick={() => updateRepository(repository.id)}
             />
           </div>
         </header>
@@ -36,7 +36,7 @@ const CompareList = ({ repositories, removeRepository, updateRepository }) => (
           </li>
 
           <li>
-            {repository.lastCommit} <small>last commit</small>
+            {repository.last_commit} <small>last commit</small>
           </li>
         </ul>
       </Repository>

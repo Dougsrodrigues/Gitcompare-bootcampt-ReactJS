@@ -42,7 +42,7 @@ export default class Main extends Component {
         loading: false
       });
     }
-    //criando o localStorage e colocando o nome da chave de repository e o valor c o contenudo q vai p repositories
+    //criando o localStorage e colocando o nome da chave de repository e o valor c o conteudo q vai p repositories
     window.localStorage.setItem(
       "repository",
       JSON.stringify(this.state.repositories)
@@ -84,7 +84,7 @@ export default class Main extends Component {
     const repository = repositories.find(rep => rep.id === id);
     try {
       const { data } = await api.get(`/repos/${repository.full_name}`);
-
+      // console.log(data);
       data.last_commit = moment(data.pushed_at).fromNow();
 
       this.setState({

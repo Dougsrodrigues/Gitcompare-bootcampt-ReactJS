@@ -42,7 +42,6 @@ export default class Main extends Component {
         loading: false
       });
     }
-
     //criando o localStorage e colocando o nome da chave de repository e o valor c o contenudo q vai p repositories
     window.localStorage.setItem(
       "repository",
@@ -59,6 +58,46 @@ export default class Main extends Component {
         })
     );
   }
+
+  //Removendo do state e do localStorage
+  handleRemoveRepository = async id => {
+    const { repositories } = this.state;
+    const updateRepositories = repositories.filter(
+      repository => repository.id !== id
+    );
+
+    this.setState({
+      repositories: updateRepositories
+    });
+
+    await localStorage.setItem(
+      "repository",
+      JSON.stringify(updateRepositories)
+    );
+  };
+
+  //Fazendo o update e salvando as alterações
+  handleUpdateRepository = async id => {
+    //salvando os dados do state na variavel repositories
+    const { repositories } = this.state;
+    //salvando o repositorio selecionado na variavel repository
+    const repository = repositories.find(rep => rep.id === id);
+    try {
+      const { data } = await api.get(`/repos/${repository.full_name}`);
+
+      data.last_commit = moment(data.pushed_at).fromNow();
+
+      this.setState({
+        repositoryError: false,
+        repositoryInput: "",
+        repositories: repositories.map(rep => (rep.id === data.id ? data : rep))
+      });
+
+      await localStorage.setItem("repository", JSON.stringify(repositories));
+    } catch (err) {
+      this.state({ repositoryError: true });
+    }
+  };
 
   render() {
     return (
@@ -83,7 +122,11 @@ export default class Main extends Component {
             )}
           </button>
         </Form>
-        <CompareList repositories={this.state.repositories} />
+        <CompareList
+          repositories={this.state.repositories}
+          removeRepository={this.handleRemoveRepository}
+          updateRepository={this.handleUpdateRepository}
+        />
       </Container>
     );
   }

@@ -35,14 +35,25 @@ export const Repository = styled.div`
       font-size: 14px;
       color: #666;
     }
+  }
 
-    button {
+  .button {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-left: 190px;
+
+    .remove {
       background: red;
       color: #fff;
       border-radius: 3px;
       padding: 5px;
-      position: absolute;
-      margin-left: 200px;
+    }
+    .update {
+      background: blue;
+      color: #fff;
+      border-radius: 3px;
+      padding: 5px;
     }
   }
 
